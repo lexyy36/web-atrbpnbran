@@ -1,66 +1,239 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Absensi BPN
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Absensi BPN adalah aplikasi sederhana berbasis Laravel untuk mengelola data pegawai, jabatan, dan rekam absensi harian. Aplikasi ini menyediakan dashboard statistik sederhana, CRUD untuk jabatan, pegawai, dan absensi, serta tampilan yang responsif dengan template SB-Admin.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Daftar Isi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Tentang Aplikasi](#tentang-aplikasi)
+-   [Fitur Utama](#fitur-utama)
+-   [Peran Admin](#peran-admin)
+-   [Requirements](#requirements)
+-   [Instalasi & Setup](#instalasi--setup)
+    -   [Clone repo](#clone-repo)
+    -   [Konfigurasi environment](#konfigurasi-environment)
+    -   [Install dependencies](#install-dependencies)
+    -   [Migrasi & seeding](#migrasi--seeding)
+    -   [Menjalankan aplikasi](#menjalankan-aplikasi)
+-   [Cara Penggunaan (Admin)](#cara-penggunaan-admin)
+-   [ERD / Struktur Database](#erd--struktur-database)
+-   [Routes & API singkat](#routes--api-singkat)
+-   [Catatan Tambahan](#catatan-tambahan)
+-   [Kontribusi & Lisensi](#kontribusi--lisensi)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Tentang Aplikasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sistem Absensi BPN dirancang untuk membantu admin mengelola data jabatan, pegawai, serta mencatat kehadiran (absensi) harian. Aplikasi ini berbasis Laravel 10 dan menggunakan Vite untuk tooling frontend.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Fitur Utama
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Autentikasi pengguna (login/logout).
+-   Dashboard menampilkan statistik dan ringkasan absensi.
+-   CRUD Jabatan (position).
+-   CRUD Pegawai (employee) beserta foto profil.
+-   CRUD Absensi (tanggal & status: Hadir / Izin / Sakit / Alpha).
+-   Upload dan pengelolaan file foto pegawai.
 
-## Laravel Sponsors
+## Peran Admin
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Admin adalah pengguna yang memiliki akses ke seluruh fitur aplikasi (dashboard, CRUD jabatan, pegawai, dan absensi). Tugas admin meliputi:
 
-### Premium Partners
+-   Menambahkan/ubah/hapus data Jabatan.
+-   Menambahkan/ubah/hapus data Pegawai beserta foto.
+-   Mencatat, mengubah, atau menghapus data absensi per pegawai.
+-   Memantau laporan & statistik absensi harian di dashboard.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+> Catatan: Saat ini aplikasi tidak menerapkan sistem peran (role/permissions) yang kompleks, jadi setiap user yang memiliki akun dapat mengakses fitur admin jika sudah login.
 
-## Contributing
+## Requirements
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   PHP >= 8.1
+-   Composer
+-   Node.js (v16+) dan NPM
+-   MySQL / MariaDB (bisa juga gunakan DB lain jika disesuaikan di `.env`)
+-   Git (untuk clone)
 
-## Code of Conduct
+## Instalasi & Setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Berikut langkah-langkah menjalankan project secara lokal (Windows PowerShell):
 
-## Security Vulnerabilities
+### Clone repo
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+git clone https://github.com/lexyy36/web-atrbpnbran.git
+cd web-atrbpnbran
+```
 
-## License
+### Konfigurasi environment
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Salin file `.env.example` menjadi `.env`:
+
+```powershell
+copy .env.example .env
+```
+
+2. Buka `.env` dan sesuaikan konfigurasi database (DB_DATABASE, DB_USERNAME, DB_PASSWORD), APP_URL, dan pengaturan lain jika diperlukan.
+
+3. Buat database di MySQL (contoh):
+
+```sql
+CREATE DATABASE web_atrbpnbran;
+```
+
+### Install dependencies
+
+```powershell
+composer install
+npm install
+```
+
+### Generate application key
+
+```powershell
+php artisan key:generate
+```
+
+### Migrate dan Seed (opsional)
+
+```powershell
+php artisan migrate
+php artisan db:seed
+```
+
+Jika belum ada seeder khusus untuk membuat user admin, anda bisa membuat user lewat tinker:
+
+```powershell
+php artisan tinker
+>>> use App\Models\User;
+>>> User::create(['name' => 'Admin', 'email' => 'admin@example.com', 'password' => bcrypt('password')]);
+>>> exit
+```
+
+### Storage link (file upload)
+
+```powershell
+php artisan storage:link
+```
+
+### Menjalankan aplikasi
+
+Untuk development:
+
+```powershell
+npm run dev
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+Kemudian buka `http://127.0.0.1:8000` di browser.
+
+---
+
+## Cara Penggunaan (Admin)
+
+1. Login menggunakan akun yang sudah dibuat (mis. `admin@example.com`).
+2. Mengelola Jabatan: Menu > Jabatan > Tambah / Edit / Hapus.
+3. Mengelola Pegawai: Menu > Pegawai > Tambah (upload foto) / Edit / Hapus.
+4. Mengelola Absensi: Menu > Absensi > Tambah catatan kehadiran pegawai (pilih pegawai, tanggal, dan status).
+5. Di Dashboard admin, Anda melihat ringkasan: total pegawai, jumlah kehadiran harian, dan grafik distribusi absensi.
+
+Catatan: Status absensi pada database disimpan dengan nilai enum: `hadir`, `izin`, `sakit`, `alpha`.
+
+## ERD / Struktur Database
+
+Berikut adalah ringkasan tabel dan relasi utama:
+
+Tables:
+
+-   `users`: id, name, email, password, timestamps
+-   `jabatan`: id, nama_jabatan, timestamps
+-   `pegawai`: id, nama, jabatan_id (FK), foto, timestamps
+-   `absensi`: id, pegawai_id (FK), tanggal, status, timestamps
+
+Relasi:
+
+-   Jabatan 1 -- n Pegawai
+-   Pegawai 1 -- n Absensi
+
+ASCII ERD:
+
+```
+Jabatan
+  id
+  nama_jabatan
+  timestamps
+
+Pegawai
+  id
+  nama
+  jabatan_id -> jabatan.id
+  foto
+  timestamps
+
+Absensi
+  id
+  pegawai_id -> pegawai.id
+  tanggal
+  status (hadir/izin/sakit/alpha)
+  timestamps
+```
+
+PlantUML (opsional - dapat digunakan untuk menghasilkan gambar ERD):
+
+```plantuml
+@startuml
+entity jabatan {
+  *id : bigint
+  *nama_jabatan : string
+  *timestamps
+}
+
+entity pegawai {
+  *id : bigint
+  *nama : string
+  *jabatan_id : bigint
+  *foto : string
+  *timestamps
+}
+
+entity absensi {
+  *id : bigint
+  *pegawai_id : bigint
+  *tanggal : date
+  *status : enum
+  *timestamps
+}
+
+jabatan ||--o{ pegawai : "has many"
+pegawai ||--o{ absensi : "has many"
+@enduml
+```
+
+## Routes & API singkat
+
+-   Login: `GET /login`, `POST /login`
+-   Logout: `POST /logout`
+-   Dashboard: `GET /` (requires auth)
+-   Resource routes (CRUD untuk admin, memerlukan auth):
+    -   `jabatan`: `/jabatan` (index, create, store, edit, update, destroy)
+    -   `pegawai`: `/pegawai` (index, create, store, edit, update, destroy)
+    -   `absensi`: `/absensi` (index, create, store, edit, update, destroy)
+
+## Troubleshooting & Tips
+
+-   Jika `php artisan migrate` gagal, pastikan database terbuat dan `.env` sudah benar.
+-   Jika tidak ada user untuk login: gunakan `php artisan tinker` untuk membuat user admin (lihat langkah di atas).
+-   Hapus cache config jika environment tidak terbaca: `php artisan config:clear`.
+-   Jika Anda menggunakan port lain untuk `artisan serve`, sesuaikan `APP_URL` di `.env`.
+
+## Kontribusi & Lisensi
+
+Kontribusi perbaikan atau fitur diterima dengan mengirimkan PR ke repository ini.
+
+Lisensi: MIT.
+
+---
+
+Jika butuh dokumentasi tambahan (contoh export CSV, fitur laporan, atau UI baru), beri tahu saya fitur mana yang ingin ditambahkan dan saya bantu sediakan dokumentasi & langkah implementasinya.
