@@ -30,14 +30,9 @@ Sistem Absensi BPN dirancang untuk membantu admin mengelola data jabatan, pegawa
 
 ## Fitur Utama
 
--   Autentikasi pengguna (login/logout).
--   Dashboard menampilkan statistik dan ringkasan absensi.
--   CRUD Jabatan (position).
 -   CRUD Pegawai (employee) beserta foto profil.
 -   CRUD Absensi (tanggal & status: Hadir / Izin / Sakit / Alpha).
 -   Upload dan pengelolaan file foto pegawai.
-
-## Peran Admin
 
 Admin adalah pengguna yang memiliki akses ke seluruh fitur aplikasi (dashboard, CRUD jabatan, pegawai, dan absensi). Tugas admin meliputi:
 
@@ -180,36 +175,13 @@ Absensi
   timestamps
 ```
 
-PlantUML (opsional - dapat digunakan untuk menghasilkan gambar ERD):
+PlantUML (opsional - dapat digunakan untuk menghasilkan gambar ERD & Use Case):
 
-```plantuml
-@startuml
-entity jabatan {
-  *id : bigint
-  *nama_jabatan : string
-  *timestamps
-}
+ERD PlantUML (copy & paste ke https://www.plantuml.com/plantuml/):
 
-entity pegawai {
-  *id : bigint
-  *nama : string
-  *jabatan_id : bigint
-  *foto : string
-  *timestamps
-}
+![ERD](docs/erd.png)
 
-entity absensi {
-  *id : bigint
-  *pegawai_id : bigint
-  *tanggal : date
-  *status : enum
-  *timestamps
-}
-
-jabatan ||--o{ pegawai : "has many"
-pegawai ||--o{ absensi : "has many"
-@enduml
-```
+![UML](docs/uml-use-case.png)
 
 ## Routes & API singkat
 
