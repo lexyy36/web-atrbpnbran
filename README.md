@@ -138,48 +138,10 @@ Catatan: Status absensi pada database disimpan dengan nilai enum: `hadir`, `izin
 
 ## ERD / Struktur Database
 
-Berikut adalah ringkasan tabel dan relasi utama:
-
-Tables:
-
--   `users`: id, name, email, password, timestamps
--   `jabatan`: id, nama_jabatan, timestamps
--   `pegawai`: id, nama, jabatan_id (FK), foto, timestamps
--   `absensi`: id, pegawai_id (FK), tanggal, status, timestamps
-
-Relasi:
+![ERD](docs/erd.png)
 
 -   Jabatan 1 -- n Pegawai
 -   Pegawai 1 -- n Absensi
-
-ASCII ERD:
-
-```
-Jabatan
-  id
-  nama_jabatan
-  timestamps
-
-Pegawai
-  id
-  nama
-  jabatan_id -> jabatan.id
-  foto
-  timestamps
-
-Absensi
-  id
-  pegawai_id -> pegawai.id
-  tanggal
-  status (hadir/izin/sakit/alpha)
-  timestamps
-```
-
-PlantUML (opsional - dapat digunakan untuk menghasilkan gambar ERD & Use Case):
-
-ERD PlantUML (copy & paste ke https://www.plantuml.com/plantuml/):
-
-![ERD](docs/erd.png)
 
 ![UML](docs/uml-use-case.png)
 
