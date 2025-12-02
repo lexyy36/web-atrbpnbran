@@ -143,6 +143,8 @@ Catatan: Status absensi pada database disimpan dengan nilai enum: `hadir`, `izin
 -   Jabatan 1 -- n Pegawai
 -   Pegawai 1 -- n Absensi
 
+## UML Use Case
+
 ![UML](docs/uml-use-case.png)
 
 ## Routes & API singkat
